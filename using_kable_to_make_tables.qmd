@@ -1,0 +1,52 @@
+---
+title: "kable tables"
+format: html
+editor: visual
+---
+
+## 
+
+```{r}
+
+library(tidyverse)
+library(kableExtra)
+
+#library(lterdata)
+
+cars <- mtcars
+
+cars_summary <- mtcars |>
+  group_by(cyl, gear) |>
+  summarize(mean_mpg = round(mean(mpg, na.rm = TRUE),1),
+            sd_mpg = round(sd(mpg, na.rm = TRUE)1))
+
+            # rounding too
+
+cars_summary |> 
+  kable() |> 
+  kable_styling(bootstrap_options = "striped")
+
+# specify the column names in the table
+
+cars_summary |> 
+  kable(col.names = c("Cylinder", "Gear", "Mean Miles per Gallon", "SD Miles per Gallon")) |> 
+  kable_styling(bootstrap_options = "striped") |> 
+  column_spec(1, bold = TRUE, background = "#E5ABF8")
+
+# column_spec to change specifics in a column 
+
+# creating nested titles
+cars_summary |> 
+  kable(col.names = c("Cylinder", "Gear", "Mean Miles per Gallon", "SD Miles per Gallon")) |> 
+  kable_styling(bootstrap_options = "striped") |> 
+  column_spec(1, bold = TRUE, background = "#E5ABF8") |> 
+  add_header_above(c(" " = 2, "SMiles per Gallon" = 2)) |> 
+  scroll_box(height = "1600px", width = "900px")
+
+# vector that says how many columns do we want to have a header
+
+# spend the time to put tables in a presentable table - with kable extra or dt reactable - gt
+
+# customizing columns or rows
+
+```
